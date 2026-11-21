@@ -1,0 +1,470 @@
+[
+ {
+  "family": "sum",
+  "target_solution": "a",
+  "bug": "drops_last",
+  "n_mined_raw": 4,
+  "n_dropped_unsound": 0,
+  "dropped": [],
+  "n_mined": 4,
+  "mined": [
+   "ret_int",
+   "ret_le_sum",
+   "ret_ge_sum",
+   "ret_eq_sum"
+  ],
+  "clean_violations": 0,
+  "bug_violations": 266,
+  "caught": 1,
+  "self_spec_size": 1,
+  "self_caught": 0
+ },
+ {
+  "family": "sum",
+  "target_solution": "a",
+  "bug": "double_first",
+  "n_mined_raw": 4,
+  "n_dropped_unsound": 0,
+  "dropped": [],
+  "n_mined": 4,
+  "mined": [
+   "ret_int",
+   "ret_le_sum",
+   "ret_ge_sum",
+   "ret_eq_sum"
+  ],
+  "clean_violations": 0,
+  "bug_violations": 260,
+  "caught": 1,
+  "self_spec_size": 1,
+  "self_caught": 0
+ },
+ {
+  "family": "sum",
+  "target_solution": "b",
+  "bug": "drops_last",
+  "n_mined_raw": 4,
+  "n_dropped_unsound": 0,
+  "dropped": [],
+  "n_mined": 4,
+  "mined": [
+   "ret_int",
+   "ret_le_sum",
+   "ret_ge_sum",
+   "ret_eq_sum"
+  ],
+  "clean_violations": 0,
+  "bug_violations": 266,
+  "caught": 1,
+  "self_spec_size": 1,
+  "self_caught": 0
+ },
+ {
+  "family": "sum",
+  "target_solution": "b",
+  "bug": "double_first",
+  "n_mined_raw": 4,
+  "n_dropped_unsound": 0,
+  "dropped": [],
+  "n_mined": 4,
+  "mined": [
+   "ret_int",
+   "ret_le_sum",
+   "ret_ge_sum",
+   "ret_eq_sum"
+  ],
+  "clean_violations": 0,
+  "bug_violations": 260,
+  "caught": 1,
+  "self_spec_size": 1,
+  "self_caught": 0
+ },
+ {
+  "family": "sum",
+  "target_solution": "c",
+  "bug": "drops_last",
+  "n_mined_raw": 4,
+  "n_dropped_unsound": 0,
+  "dropped": [],
+  "n_mined": 4,
+  "mined": [
+   "ret_int",
+   "ret_le_sum",
+   "ret_ge_sum",
+   "ret_eq_sum"
+  ],
+  "clean_violations": 0,
+  "bug_violations": 266,
+  "caught": 1,
+  "self_spec_size": 1,
+  "self_caught": 0
+ },
+ {
+  "family": "sum",
+  "target_solution": "c",
+  "bug": "double_first",
+  "n_mined_raw": 4,
+  "n_dropped_unsound": 0,
+  "dropped": [],
+  "n_mined": 4,
+  "mined": [
+   "ret_int",
+   "ret_le_sum",
+   "ret_ge_sum",
+   "ret_eq_sum"
+  ],
+  "clean_violations": 0,
+  "bug_violations": 260,
+  "caught": 1,
+  "self_spec_size": 1,
+  "self_caught": 0
+ },
+ {
+  "family": "count_positive",
+  "target_solution": "a",
+  "bug": "ge_zero",
+  "n_mined_raw": 4,
+  "n_dropped_unsound": 0,
+  "dropped": [],
+  "n_mined": 4,
+  "mined": [
+   "ret_int",
+   "ret_le_len",
+   "ret_ge_zero",
+   "ret_ge_0_or_present"
+  ],
+  "clean_violations": 0,
+  "bug_violations": 0,
+  "caught": 0,
+  "self_spec_size": 4,
+  "self_caught": 0
+ },
+ {
+  "family": "count_positive",
+  "target_solution": "a",
+  "bug": "abs",
+  "n_mined_raw": 4,
+  "n_dropped_unsound": 0,
+  "dropped": [],
+  "n_mined": 4,
+  "mined": [
+   "ret_int",
+   "ret_le_len",
+   "ret_ge_zero",
+   "ret_ge_0_or_present"
+  ],
+  "clean_violations": 0,
+  "bug_violations": 0,
+  "caught": 0,
+  "self_spec_size": 4,
+  "self_caught": 0
+ },
+ {
+  "family": "count_positive",
+  "target_solution": "b",
+  "bug": "ge_zero",
+  "n_mined_raw": 4,
+  "n_dropped_unsound": 0,
+  "dropped": [],
+  "n_mined": 4,
+  "mined": [
+   "ret_int",
+   "ret_le_len",
+   "ret_ge_zero",
+   "ret_ge_0_or_present"
+  ],
+  "clean_violations": 0,
+  "bug_violations": 0,
+  "caught": 0,
+  "self_spec_size": 4,
+  "self_caught": 0
+ },
+ {
+  "family": "count_positive",
+  "target_solution": "b",
+  "bug": "abs",
+  "n_mined_raw": 4,
+  "n_dropped_unsound": 0,
+  "dropped": [],
+  "n_mined": 4,
+  "mined": [
+   "ret_int",
+   "ret_le_len",
+   "ret_ge_zero",
+   "ret_ge_0_or_present"
+  ],
+  "clean_violations": 0,
+  "bug_violations": 0,
+  "caught": 0,
+  "self_spec_size": 4,
+  "self_caught": 0
+ },
+ {
+  "family": "count_positive",
+  "target_solution": "c",
+  "bug": "ge_zero",
+  "n_mined_raw": 4,
+  "n_dropped_unsound": 0,
+  "dropped": [],
+  "n_mined": 4,
+  "mined": [
+   "ret_int",
+   "ret_le_len",
+   "ret_ge_zero",
+   "ret_ge_0_or_present"
+  ],
+  "clean_violations": 0,
+  "bug_violations": 0,
+  "caught": 0,
+  "self_spec_size": 4,
+  "self_caught": 0
+ },
+ {
+  "family": "count_positive",
+  "target_solution": "c",
+  "bug": "abs",
+  "n_mined_raw": 4,
+  "n_dropped_unsound": 0,
+  "dropped": [],
+  "n_mined": 4,
+  "mined": [
+   "ret_int",
+   "ret_le_len",
+   "ret_ge_zero",
+   "ret_ge_0_or_present"
+  ],
+  "clean_violations": 0,
+  "bug_violations": 0,
+  "caught": 0,
+  "self_spec_size": 4,
+  "self_caught": 0
+ },
+ {
+  "family": "max_subarray",
+  "target_solution": "a",
+  "bug": "all_negative",
+  "n_mined_raw": 3,
+  "n_dropped_unsound": 0,
+  "dropped": [],
+  "n_mined": 3,
+  "mined": [
+   "ret_int",
+   "ret_ge_min",
+   "ret_ge_sum"
+  ],
+  "clean_violations": 0,
+  "bug_violations": 0,
+  "caught": 0,
+  "self_spec_size": 5,
+  "self_caught": 0
+ },
+ {
+  "family": "max_subarray",
+  "target_solution": "a",
+  "bug": "ignores_last",
+  "n_mined_raw": 3,
+  "n_dropped_unsound": 0,
+  "dropped": [],
+  "n_mined": 3,
+  "mined": [
+   "ret_int",
+   "ret_ge_min",
+   "ret_ge_sum"
+  ],
+  "clean_violations": 0,
+  "bug_violations": 33,
+  "caught": 1,
+  "self_spec_size": 2,
+  "self_caught": 0
+ },
+ {
+  "family": "max_subarray",
+  "target_solution": "b",
+  "bug": "all_negative",
+  "n_mined_raw": 3,
+  "n_dropped_unsound": 0,
+  "dropped": [],
+  "n_mined": 3,
+  "mined": [
+   "ret_int",
+   "ret_ge_min",
+   "ret_ge_sum"
+  ],
+  "clean_violations": 0,
+  "bug_violations": 0,
+  "caught": 0,
+  "self_spec_size": 5,
+  "self_caught": 0
+ },
+ {
+  "family": "max_subarray",
+  "target_solution": "b",
+  "bug": "ignores_last",
+  "n_mined_raw": 3,
+  "n_dropped_unsound": 0,
+  "dropped": [],
+  "n_mined": 3,
+  "mined": [
+   "ret_int",
+   "ret_ge_min",
+   "ret_ge_sum"
+  ],
+  "clean_violations": 0,
+  "bug_violations": 33,
+  "caught": 1,
+  "self_spec_size": 2,
+  "self_caught": 0
+ },
+ {
+  "family": "max_subarray",
+  "target_solution": "c",
+  "bug": "all_negative",
+  "n_mined_raw": 3,
+  "n_dropped_unsound": 0,
+  "dropped": [],
+  "n_mined": 3,
+  "mined": [
+   "ret_int",
+   "ret_ge_min",
+   "ret_ge_sum"
+  ],
+  "clean_violations": 0,
+  "bug_violations": 0,
+  "caught": 0,
+  "self_spec_size": 5,
+  "self_caught": 0
+ },
+ {
+  "family": "max_subarray",
+  "target_solution": "c",
+  "bug": "ignores_last",
+  "n_mined_raw": 3,
+  "n_dropped_unsound": 0,
+  "dropped": [],
+  "n_mined": 3,
+  "mined": [
+   "ret_int",
+   "ret_ge_min",
+   "ret_ge_sum"
+  ],
+  "clean_violations": 0,
+  "bug_violations": 33,
+  "caught": 1,
+  "self_spec_size": 2,
+  "self_caught": 0
+ },
+ {
+  "family": "is_sorted",
+  "target_solution": "a",
+  "bug": "strict",
+  "n_mined_raw": 3,
+  "n_dropped_unsound": 0,
+  "dropped": [],
+  "n_mined": 3,
+  "mined": [
+   "ret_bool",
+   "ret_ge_zero",
+   "ret_ge_0_or_present"
+  ],
+  "clean_violations": 0,
+  "bug_violations": 0,
+  "caught": 0,
+  "self_spec_size": 3,
+  "self_caught": 0
+ },
+ {
+  "family": "is_sorted",
+  "target_solution": "a",
+  "bug": "skips_last",
+  "n_mined_raw": 3,
+  "n_dropped_unsound": 0,
+  "dropped": [],
+  "n_mined": 3,
+  "mined": [
+   "ret_bool",
+   "ret_ge_zero",
+   "ret_ge_0_or_present"
+  ],
+  "clean_violations": 0,
+  "bug_violations": 0,
+  "caught": 0,
+  "self_spec_size": 3,
+  "self_caught": 0
+ },
+ {
+  "family": "is_sorted",
+  "target_solution": "b",
+  "bug": "strict",
+  "n_mined_raw": 3,
+  "n_dropped_unsound": 0,
+  "dropped": [],
+  "n_mined": 3,
+  "mined": [
+   "ret_bool",
+   "ret_ge_zero",
+   "ret_ge_0_or_present"
+  ],
+  "clean_violations": 0,
+  "bug_violations": 0,
+  "caught": 0,
+  "self_spec_size": 3,
+  "self_caught": 0
+ },
+ {
+  "family": "is_sorted",
+  "target_solution": "b",
+  "bug": "skips_last",
+  "n_mined_raw": 3,
+  "n_dropped_unsound": 0,
+  "dropped": [],
+  "n_mined": 3,
+  "mined": [
+   "ret_bool",
+   "ret_ge_zero",
+   "ret_ge_0_or_present"
+  ],
+  "clean_violations": 0,
+  "bug_violations": 0,
+  "caught": 0,
+  "self_spec_size": 3,
+  "self_caught": 0
+ },
+ {
+  "family": "is_sorted",
+  "target_solution": "c",
+  "bug": "strict",
+  "n_mined_raw": 3,
+  "n_dropped_unsound": 0,
+  "dropped": [],
+  "n_mined": 3,
+  "mined": [
+   "ret_bool",
+   "ret_ge_zero",
+   "ret_ge_0_or_present"
+  ],
+  "clean_violations": 0,
+  "bug_violations": 0,
+  "caught": 0,
+  "self_spec_size": 3,
+  "self_caught": 0
+ },
+ {
+  "family": "is_sorted",
+  "target_solution": "c",
+  "bug": "skips_last",
+  "n_mined_raw": 3,
+  "n_dropped_unsound": 0,
+  "dropped": [],
+  "n_mined": 3,
+  "mined": [
+   "ret_bool",
+   "ret_ge_zero",
+   "ret_ge_0_or_present"
+  ],
+  "clean_violations": 0,
+  "bug_violations": 0,
+  "caught": 0,
+  "self_spec_size": 3,
+  "self_caught": 0
+ }
+]

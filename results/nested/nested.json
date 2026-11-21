@@ -1,0 +1,1028 @@
+{
+ "bounds_only": [
+  {
+   "family": "sum",
+   "target": "a",
+   "bug": "drops_last",
+   "spec": [
+    "ret_int"
+   ],
+   "spec_size": 1,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "sum",
+   "target": "a",
+   "bug": "double_first",
+   "spec": [
+    "ret_int"
+   ],
+   "spec_size": 1,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "sum",
+   "target": "b",
+   "bug": "drops_last",
+   "spec": [
+    "ret_int"
+   ],
+   "spec_size": 1,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "sum",
+   "target": "b",
+   "bug": "double_first",
+   "spec": [
+    "ret_int"
+   ],
+   "spec_size": 1,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "sum",
+   "target": "c",
+   "bug": "drops_last",
+   "spec": [
+    "ret_int"
+   ],
+   "spec_size": 1,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "sum",
+   "target": "c",
+   "bug": "double_first",
+   "spec": [
+    "ret_int"
+   ],
+   "spec_size": 1,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "count_positive",
+   "target": "a",
+   "bug": "ge_zero",
+   "spec": [
+    "ret_int",
+    "ret_le_len",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 4,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "count_positive",
+   "target": "a",
+   "bug": "abs",
+   "spec": [
+    "ret_int",
+    "ret_le_len",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 4,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "count_positive",
+   "target": "b",
+   "bug": "ge_zero",
+   "spec": [
+    "ret_int",
+    "ret_le_len",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 4,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "count_positive",
+   "target": "b",
+   "bug": "abs",
+   "spec": [
+    "ret_int",
+    "ret_le_len",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 4,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "count_positive",
+   "target": "c",
+   "bug": "ge_zero",
+   "spec": [
+    "ret_int",
+    "ret_le_len",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 4,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "count_positive",
+   "target": "c",
+   "bug": "abs",
+   "spec": [
+    "ret_int",
+    "ret_le_len",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 4,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "max_subarray",
+   "target": "a",
+   "bug": "all_negative",
+   "spec": [
+    "ret_int"
+   ],
+   "spec_size": 1,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "max_subarray",
+   "target": "a",
+   "bug": "ignores_last",
+   "spec": [
+    "ret_int"
+   ],
+   "spec_size": 1,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "max_subarray",
+   "target": "b",
+   "bug": "all_negative",
+   "spec": [
+    "ret_int"
+   ],
+   "spec_size": 1,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "max_subarray",
+   "target": "b",
+   "bug": "ignores_last",
+   "spec": [
+    "ret_int"
+   ],
+   "spec_size": 1,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "max_subarray",
+   "target": "c",
+   "bug": "all_negative",
+   "spec": [
+    "ret_int"
+   ],
+   "spec_size": 1,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "max_subarray",
+   "target": "c",
+   "bug": "ignores_last",
+   "spec": [
+    "ret_int"
+   ],
+   "spec_size": 1,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "is_sorted",
+   "target": "a",
+   "bug": "strict",
+   "spec": [
+    "ret_bool",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 3,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "is_sorted",
+   "target": "a",
+   "bug": "skips_last",
+   "spec": [
+    "ret_bool",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 3,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "is_sorted",
+   "target": "b",
+   "bug": "strict",
+   "spec": [
+    "ret_bool",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 3,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "is_sorted",
+   "target": "b",
+   "bug": "skips_last",
+   "spec": [
+    "ret_bool",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 3,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "is_sorted",
+   "target": "c",
+   "bug": "strict",
+   "spec": [
+    "ret_bool",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 3,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "is_sorted",
+   "target": "c",
+   "bug": "skips_last",
+   "spec": [
+    "ret_bool",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 3,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  }
+ ],
+ "relational_only": [
+  {
+   "family": "sum",
+   "target": "a",
+   "bug": "drops_last",
+   "spec": [
+    "ret_le_sum",
+    "ret_ge_sum",
+    "ret_eq_sum"
+   ],
+   "spec_size": 3,
+   "has_relational": true,
+   "clean_fp": 0,
+   "caught": 1,
+   "violations": 724
+  },
+  {
+   "family": "sum",
+   "target": "a",
+   "bug": "double_first",
+   "spec": [
+    "ret_le_sum",
+    "ret_ge_sum",
+    "ret_eq_sum"
+   ],
+   "spec_size": 3,
+   "has_relational": true,
+   "clean_fp": 0,
+   "caught": 1,
+   "violations": 728
+  },
+  {
+   "family": "sum",
+   "target": "b",
+   "bug": "drops_last",
+   "spec": [
+    "ret_le_sum",
+    "ret_ge_sum",
+    "ret_eq_sum"
+   ],
+   "spec_size": 3,
+   "has_relational": true,
+   "clean_fp": 0,
+   "caught": 1,
+   "violations": 724
+  },
+  {
+   "family": "sum",
+   "target": "b",
+   "bug": "double_first",
+   "spec": [
+    "ret_le_sum",
+    "ret_ge_sum",
+    "ret_eq_sum"
+   ],
+   "spec_size": 3,
+   "has_relational": true,
+   "clean_fp": 0,
+   "caught": 1,
+   "violations": 728
+  },
+  {
+   "family": "sum",
+   "target": "c",
+   "bug": "drops_last",
+   "spec": [
+    "ret_le_sum",
+    "ret_ge_sum",
+    "ret_eq_sum"
+   ],
+   "spec_size": 3,
+   "has_relational": true,
+   "clean_fp": 0,
+   "caught": 1,
+   "violations": 724
+  },
+  {
+   "family": "sum",
+   "target": "c",
+   "bug": "double_first",
+   "spec": [
+    "ret_le_sum",
+    "ret_ge_sum",
+    "ret_eq_sum"
+   ],
+   "spec_size": 3,
+   "has_relational": true,
+   "clean_fp": 0,
+   "caught": 1,
+   "violations": 728
+  },
+  {
+   "family": "count_positive",
+   "target": "a",
+   "bug": "ge_zero",
+   "spec": [],
+   "spec_size": 0,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "count_positive",
+   "target": "a",
+   "bug": "abs",
+   "spec": [],
+   "spec_size": 0,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "count_positive",
+   "target": "b",
+   "bug": "ge_zero",
+   "spec": [],
+   "spec_size": 0,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "count_positive",
+   "target": "b",
+   "bug": "abs",
+   "spec": [],
+   "spec_size": 0,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "count_positive",
+   "target": "c",
+   "bug": "ge_zero",
+   "spec": [],
+   "spec_size": 0,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "count_positive",
+   "target": "c",
+   "bug": "abs",
+   "spec": [],
+   "spec_size": 0,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "max_subarray",
+   "target": "a",
+   "bug": "all_negative",
+   "spec": [
+    "ret_ge_min",
+    "ret_ge_sum"
+   ],
+   "spec_size": 2,
+   "has_relational": true,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "max_subarray",
+   "target": "a",
+   "bug": "ignores_last",
+   "spec": [
+    "ret_ge_min",
+    "ret_ge_sum"
+   ],
+   "spec_size": 2,
+   "has_relational": true,
+   "clean_fp": 0,
+   "caught": 1,
+   "violations": 74
+  },
+  {
+   "family": "max_subarray",
+   "target": "b",
+   "bug": "all_negative",
+   "spec": [
+    "ret_ge_min",
+    "ret_ge_sum"
+   ],
+   "spec_size": 2,
+   "has_relational": true,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "max_subarray",
+   "target": "b",
+   "bug": "ignores_last",
+   "spec": [
+    "ret_ge_min",
+    "ret_ge_sum"
+   ],
+   "spec_size": 2,
+   "has_relational": true,
+   "clean_fp": 0,
+   "caught": 1,
+   "violations": 74
+  },
+  {
+   "family": "max_subarray",
+   "target": "c",
+   "bug": "all_negative",
+   "spec": [
+    "ret_ge_min",
+    "ret_ge_sum"
+   ],
+   "spec_size": 2,
+   "has_relational": true,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "max_subarray",
+   "target": "c",
+   "bug": "ignores_last",
+   "spec": [
+    "ret_ge_min",
+    "ret_ge_sum"
+   ],
+   "spec_size": 2,
+   "has_relational": true,
+   "clean_fp": 0,
+   "caught": 1,
+   "violations": 74
+  },
+  {
+   "family": "is_sorted",
+   "target": "a",
+   "bug": "strict",
+   "spec": [],
+   "spec_size": 0,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "is_sorted",
+   "target": "a",
+   "bug": "skips_last",
+   "spec": [],
+   "spec_size": 0,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "is_sorted",
+   "target": "b",
+   "bug": "strict",
+   "spec": [],
+   "spec_size": 0,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "is_sorted",
+   "target": "b",
+   "bug": "skips_last",
+   "spec": [],
+   "spec_size": 0,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "is_sorted",
+   "target": "c",
+   "bug": "strict",
+   "spec": [],
+   "spec_size": 0,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "is_sorted",
+   "target": "c",
+   "bug": "skips_last",
+   "spec": [],
+   "spec_size": 0,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  }
+ ],
+ "both": [
+  {
+   "family": "sum",
+   "target": "a",
+   "bug": "drops_last",
+   "spec": [
+    "ret_int",
+    "ret_le_sum",
+    "ret_ge_sum",
+    "ret_eq_sum"
+   ],
+   "spec_size": 4,
+   "has_relational": true,
+   "clean_fp": 0,
+   "caught": 1,
+   "violations": 724
+  },
+  {
+   "family": "sum",
+   "target": "a",
+   "bug": "double_first",
+   "spec": [
+    "ret_int",
+    "ret_le_sum",
+    "ret_ge_sum",
+    "ret_eq_sum"
+   ],
+   "spec_size": 4,
+   "has_relational": true,
+   "clean_fp": 0,
+   "caught": 1,
+   "violations": 728
+  },
+  {
+   "family": "sum",
+   "target": "b",
+   "bug": "drops_last",
+   "spec": [
+    "ret_int",
+    "ret_le_sum",
+    "ret_ge_sum",
+    "ret_eq_sum"
+   ],
+   "spec_size": 4,
+   "has_relational": true,
+   "clean_fp": 0,
+   "caught": 1,
+   "violations": 724
+  },
+  {
+   "family": "sum",
+   "target": "b",
+   "bug": "double_first",
+   "spec": [
+    "ret_int",
+    "ret_le_sum",
+    "ret_ge_sum",
+    "ret_eq_sum"
+   ],
+   "spec_size": 4,
+   "has_relational": true,
+   "clean_fp": 0,
+   "caught": 1,
+   "violations": 728
+  },
+  {
+   "family": "sum",
+   "target": "c",
+   "bug": "drops_last",
+   "spec": [
+    "ret_int",
+    "ret_le_sum",
+    "ret_ge_sum",
+    "ret_eq_sum"
+   ],
+   "spec_size": 4,
+   "has_relational": true,
+   "clean_fp": 0,
+   "caught": 1,
+   "violations": 724
+  },
+  {
+   "family": "sum",
+   "target": "c",
+   "bug": "double_first",
+   "spec": [
+    "ret_int",
+    "ret_le_sum",
+    "ret_ge_sum",
+    "ret_eq_sum"
+   ],
+   "spec_size": 4,
+   "has_relational": true,
+   "clean_fp": 0,
+   "caught": 1,
+   "violations": 728
+  },
+  {
+   "family": "count_positive",
+   "target": "a",
+   "bug": "ge_zero",
+   "spec": [
+    "ret_int",
+    "ret_le_len",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 4,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "count_positive",
+   "target": "a",
+   "bug": "abs",
+   "spec": [
+    "ret_int",
+    "ret_le_len",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 4,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "count_positive",
+   "target": "b",
+   "bug": "ge_zero",
+   "spec": [
+    "ret_int",
+    "ret_le_len",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 4,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "count_positive",
+   "target": "b",
+   "bug": "abs",
+   "spec": [
+    "ret_int",
+    "ret_le_len",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 4,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "count_positive",
+   "target": "c",
+   "bug": "ge_zero",
+   "spec": [
+    "ret_int",
+    "ret_le_len",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 4,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "count_positive",
+   "target": "c",
+   "bug": "abs",
+   "spec": [
+    "ret_int",
+    "ret_le_len",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 4,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "max_subarray",
+   "target": "a",
+   "bug": "all_negative",
+   "spec": [
+    "ret_int",
+    "ret_ge_min",
+    "ret_ge_sum"
+   ],
+   "spec_size": 3,
+   "has_relational": true,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "max_subarray",
+   "target": "a",
+   "bug": "ignores_last",
+   "spec": [
+    "ret_int",
+    "ret_ge_min",
+    "ret_ge_sum"
+   ],
+   "spec_size": 3,
+   "has_relational": true,
+   "clean_fp": 0,
+   "caught": 1,
+   "violations": 74
+  },
+  {
+   "family": "max_subarray",
+   "target": "b",
+   "bug": "all_negative",
+   "spec": [
+    "ret_int",
+    "ret_ge_min",
+    "ret_ge_sum"
+   ],
+   "spec_size": 3,
+   "has_relational": true,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "max_subarray",
+   "target": "b",
+   "bug": "ignores_last",
+   "spec": [
+    "ret_int",
+    "ret_ge_min",
+    "ret_ge_sum"
+   ],
+   "spec_size": 3,
+   "has_relational": true,
+   "clean_fp": 0,
+   "caught": 1,
+   "violations": 74
+  },
+  {
+   "family": "max_subarray",
+   "target": "c",
+   "bug": "all_negative",
+   "spec": [
+    "ret_int",
+    "ret_ge_min",
+    "ret_ge_sum"
+   ],
+   "spec_size": 3,
+   "has_relational": true,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "max_subarray",
+   "target": "c",
+   "bug": "ignores_last",
+   "spec": [
+    "ret_int",
+    "ret_ge_min",
+    "ret_ge_sum"
+   ],
+   "spec_size": 3,
+   "has_relational": true,
+   "clean_fp": 0,
+   "caught": 1,
+   "violations": 74
+  },
+  {
+   "family": "is_sorted",
+   "target": "a",
+   "bug": "strict",
+   "spec": [
+    "ret_bool",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 3,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "is_sorted",
+   "target": "a",
+   "bug": "skips_last",
+   "spec": [
+    "ret_bool",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 3,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "is_sorted",
+   "target": "b",
+   "bug": "strict",
+   "spec": [
+    "ret_bool",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 3,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "is_sorted",
+   "target": "b",
+   "bug": "skips_last",
+   "spec": [
+    "ret_bool",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 3,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "is_sorted",
+   "target": "c",
+   "bug": "strict",
+   "spec": [
+    "ret_bool",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 3,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  },
+  {
+   "family": "is_sorted",
+   "target": "c",
+   "bug": "skips_last",
+   "spec": [
+    "ret_bool",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 3,
+   "has_relational": false,
+   "clean_fp": 0,
+   "caught": 0,
+   "violations": 0
+  }
+ ]
+}

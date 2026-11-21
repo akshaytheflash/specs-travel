@@ -1,0 +1,26 @@
+{
+ "bounds_only": {
+  "n": 24,
+  "transfer_rate": 0.0,
+  "fp_rate": 0.0,
+  "mean_spec_size": 2.25,
+  "n_with_relational": 0,
+  "transfer_rate_when_relational": null
+ },
+ "relational_only": {
+  "n": 24,
+  "transfer_rate": 0.375,
+  "fp_rate": 0.0,
+  "mean_spec_size": 1.25,
+  "n_with_relational": 12,
+  "transfer_rate_when_relational": 0.75
+ },
+ "both": {
+  "n": 24,
+  "transfer_rate": 0.375,
+  "fp_rate": 0.0,
+  "mean_spec_size": 3.5,
+  "n_with_relational": 12,
+  "transfer_rate_when_relational": 0.75
+ }
+}

@@ -1,0 +1,402 @@
+{
+ "n": 24,
+ "transfer_rate": 0.375,
+ "fp_rate": 0.0,
+ "mean_spec_size": 3.5,
+ "by_family": {
+  "sum": {
+   "n": 6,
+   "transfer_rate": 1.0,
+   "specs": [
+    [
+     "ret_int",
+     "ret_le_sum",
+     "ret_ge_sum",
+     "ret_eq_sum"
+    ],
+    [
+     "ret_int",
+     "ret_le_sum",
+     "ret_ge_sum",
+     "ret_eq_sum"
+    ]
+   ]
+  },
+  "count_positive": {
+   "n": 6,
+   "transfer_rate": 0.0,
+   "specs": [
+    [
+     "ret_int",
+     "ret_le_len",
+     "ret_ge_zero",
+     "ret_ge_0_or_present"
+    ],
+    [
+     "ret_int",
+     "ret_le_len",
+     "ret_ge_zero",
+     "ret_ge_0_or_present"
+    ]
+   ]
+  },
+  "max_subarray": {
+   "n": 6,
+   "transfer_rate": 0.5,
+   "specs": [
+    [
+     "ret_int",
+     "ret_ge_min",
+     "ret_ge_sum"
+    ],
+    [
+     "ret_int",
+     "ret_ge_min",
+     "ret_ge_sum"
+    ]
+   ]
+  },
+  "is_sorted": {
+   "n": 6,
+   "transfer_rate": 0.0,
+   "specs": [
+    [
+     "ret_bool",
+     "ret_ge_zero",
+     "ret_ge_0_or_present"
+    ],
+    [
+     "ret_bool",
+     "ret_ge_zero",
+     "ret_ge_0_or_present"
+    ]
+   ]
+  }
+ },
+ "rows": [
+  {
+   "family": "sum",
+   "target": "a",
+   "bug": "drops_last",
+   "spec": [
+    "ret_int",
+    "ret_le_sum",
+    "ret_ge_sum",
+    "ret_eq_sum"
+   ],
+   "spec_size": 4,
+   "clean_fp": 0,
+   "caught": 1
+  },
+  {
+   "family": "sum",
+   "target": "a",
+   "bug": "double_first",
+   "spec": [
+    "ret_int",
+    "ret_le_sum",
+    "ret_ge_sum",
+    "ret_eq_sum"
+   ],
+   "spec_size": 4,
+   "clean_fp": 0,
+   "caught": 1
+  },
+  {
+   "family": "sum",
+   "target": "b",
+   "bug": "drops_last",
+   "spec": [
+    "ret_int",
+    "ret_le_sum",
+    "ret_ge_sum",
+    "ret_eq_sum"
+   ],
+   "spec_size": 4,
+   "clean_fp": 0,
+   "caught": 1
+  },
+  {
+   "family": "sum",
+   "target": "b",
+   "bug": "double_first",
+   "spec": [
+    "ret_int",
+    "ret_le_sum",
+    "ret_ge_sum",
+    "ret_eq_sum"
+   ],
+   "spec_size": 4,
+   "clean_fp": 0,
+   "caught": 1
+  },
+  {
+   "family": "sum",
+   "target": "c",
+   "bug": "drops_last",
+   "spec": [
+    "ret_int",
+    "ret_le_sum",
+    "ret_ge_sum",
+    "ret_eq_sum"
+   ],
+   "spec_size": 4,
+   "clean_fp": 0,
+   "caught": 1
+  },
+  {
+   "family": "sum",
+   "target": "c",
+   "bug": "double_first",
+   "spec": [
+    "ret_int",
+    "ret_le_sum",
+    "ret_ge_sum",
+    "ret_eq_sum"
+   ],
+   "spec_size": 4,
+   "clean_fp": 0,
+   "caught": 1
+  },
+  {
+   "family": "count_positive",
+   "target": "a",
+   "bug": "ge_zero",
+   "spec": [
+    "ret_int",
+    "ret_le_len",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 4,
+   "clean_fp": 0,
+   "caught": 0
+  },
+  {
+   "family": "count_positive",
+   "target": "a",
+   "bug": "abs",
+   "spec": [
+    "ret_int",
+    "ret_le_len",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 4,
+   "clean_fp": 0,
+   "caught": 0
+  },
+  {
+   "family": "count_positive",
+   "target": "b",
+   "bug": "ge_zero",
+   "spec": [
+    "ret_int",
+    "ret_le_len",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 4,
+   "clean_fp": 0,
+   "caught": 0
+  },
+  {
+   "family": "count_positive",
+   "target": "b",
+   "bug": "abs",
+   "spec": [
+    "ret_int",
+    "ret_le_len",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 4,
+   "clean_fp": 0,
+   "caught": 0
+  },
+  {
+   "family": "count_positive",
+   "target": "c",
+   "bug": "ge_zero",
+   "spec": [
+    "ret_int",
+    "ret_le_len",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 4,
+   "clean_fp": 0,
+   "caught": 0
+  },
+  {
+   "family": "count_positive",
+   "target": "c",
+   "bug": "abs",
+   "spec": [
+    "ret_int",
+    "ret_le_len",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 4,
+   "clean_fp": 0,
+   "caught": 0
+  },
+  {
+   "family": "max_subarray",
+   "target": "a",
+   "bug": "all_negative",
+   "spec": [
+    "ret_int",
+    "ret_ge_min",
+    "ret_ge_sum"
+   ],
+   "spec_size": 3,
+   "clean_fp": 0,
+   "caught": 0
+  },
+  {
+   "family": "max_subarray",
+   "target": "a",
+   "bug": "ignores_last",
+   "spec": [
+    "ret_int",
+    "ret_ge_min",
+    "ret_ge_sum"
+   ],
+   "spec_size": 3,
+   "clean_fp": 0,
+   "caught": 1
+  },
+  {
+   "family": "max_subarray",
+   "target": "b",
+   "bug": "all_negative",
+   "spec": [
+    "ret_int",
+    "ret_ge_min",
+    "ret_ge_sum"
+   ],
+   "spec_size": 3,
+   "clean_fp": 0,
+   "caught": 0
+  },
+  {
+   "family": "max_subarray",
+   "target": "b",
+   "bug": "ignores_last",
+   "spec": [
+    "ret_int",
+    "ret_ge_min",
+    "ret_ge_sum"
+   ],
+   "spec_size": 3,
+   "clean_fp": 0,
+   "caught": 1
+  },
+  {
+   "family": "max_subarray",
+   "target": "c",
+   "bug": "all_negative",
+   "spec": [
+    "ret_int",
+    "ret_ge_min",
+    "ret_ge_sum"
+   ],
+   "spec_size": 3,
+   "clean_fp": 0,
+   "caught": 0
+  },
+  {
+   "family": "max_subarray",
+   "target": "c",
+   "bug": "ignores_last",
+   "spec": [
+    "ret_int",
+    "ret_ge_min",
+    "ret_ge_sum"
+   ],
+   "spec_size": 3,
+   "clean_fp": 0,
+   "caught": 1
+  },
+  {
+   "family": "is_sorted",
+   "target": "a",
+   "bug": "strict",
+   "spec": [
+    "ret_bool",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 3,
+   "clean_fp": 0,
+   "caught": 0
+  },
+  {
+   "family": "is_sorted",
+   "target": "a",
+   "bug": "skips_last",
+   "spec": [
+    "ret_bool",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 3,
+   "clean_fp": 0,
+   "caught": 0
+  },
+  {
+   "family": "is_sorted",
+   "target": "b",
+   "bug": "strict",
+   "spec": [
+    "ret_bool",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 3,
+   "clean_fp": 0,
+   "caught": 0
+  },
+  {
+   "family": "is_sorted",
+   "target": "b",
+   "bug": "skips_last",
+   "spec": [
+    "ret_bool",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 3,
+   "clean_fp": 0,
+   "caught": 0
+  },
+  {
+   "family": "is_sorted",
+   "target": "c",
+   "bug": "strict",
+   "spec": [
+    "ret_bool",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 3,
+   "clean_fp": 0,
+   "caught": 0
+  },
+  {
+   "family": "is_sorted",
+   "target": "c",
+   "bug": "skips_last",
+   "spec": [
+    "ret_bool",
+    "ret_ge_zero",
+    "ret_ge_0_or_present"
+   ],
+   "spec_size": 3,
+   "clean_fp": 0,
+   "caught": 0
+  }
+ ]
+}

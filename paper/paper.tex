@@ -1,0 +1,506 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+\usepackage{cite}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+
+\begin{document}
+
+\title{Do Specifications Travel?\\Relational Invariants Transfer Across Programs, Bounds Do Not}
+
+\author{\IEEEauthorblockN{Akshay}
+\IEEEauthorblockA{\textit{Independent Researcher}\\ \texttt{akshaytheflash@gmail.com}}}
+
+\maketitle
+
+\begin{abstract}
+\textbf{Background:} Specification-inference tools learn properties from the executions of
+a single program. In practice, the reason to infer a specification is usually that one is
+writing a \emph{different} program that solves the same problem -- a reference
+implementation versus one's own, a rewrite, a port. Whether an inferred specification
+transfers to another implementation has not, to our knowledge, been measured.
+\textbf{Question:} If we infer a specification from some correct implementations of a
+problem, will it detect bugs planted in a \emph{held-out} implementation it has never seen?
+\textbf{Method:} We construct four problem families, each with three independent correct
+solutions and two naturally occurring bug variants. For each family we mine a
+specification from all but one solution, subject it to a soundness gate that discards any
+predicate false on \emph{any} correct implementation, and then test whether it detects the
+bugs in the held-out solution. Specs are mined from a fixed battery of generic predicates.
+\textbf{Findings:} A generic battery transfers on only 37.5\% of held-out bugs (24 cases,
+0\% false positives). The failures are systematic, and the mechanism is visible in what is
+mined: successful specs contain a \emph{relational} predicate linking output to the
+contents of the input (e.g.\ $\mathit{ret} = \sum x$), whereas failing specs contain only
+\emph{bounds} and type constraints (e.g.\ $\mathit{ret} \ge 0$, $\mathit{ret} \le |x|$),
+which no behavioural bug can violate. Isolating the two classes confirms this: bounds alone
+transfer on \textbf{0.0\%} of cases, relations alone on 37.5\%, and 75\% whenever a
+relation is present. Supplying one family-appropriate relation raises transfer from 37.5\%
+to \textbf{87.5\%} at unchanged zero false-positive rate, lifting the two failed families
+from 0\% to 100\%.
+\textbf{Conclusion:} Specifications transfer only to the extent that they relate output to
+input content. Bounds, which are what a generic miner most readily finds, are worthless as
+transferable specifications. Transfer rate is stable at 200, 400 and 800 mining inputs,
+indicating it reflects what kinds of predicate are available rather than sampling noise.
+\end{abstract}
+
+\begin{IEEEkeywords}
+specification inference, program invariants, property-based testing, transferability,
+empirical software engineering
+\end{IEEEkeywords}
+
+\section{Introduction}
+
+Tools that infer specifications from executions -- Daikon-style dynamic invariant
+detection and its many descendants -- are usually motivated by a single-program story: run
+a program, observe its states, propose properties that always hold. The implied use is to
+document that one program, or to check that one program against its own history.
+
+The actual use is different. A spec is valuable precisely when you are writing
+\emph{another} program for the same problem: a reference implementation you must match, a
+port to a new language, a rewrite for performance, or a submission to an autograder whose
+test suite is secret. In each case the specification you want is the one that describes the
+\emph{problem}, not the one that describes the particular solution you happened to observe.
+
+That gap is the subject of this paper. We ask a question that is simple to state and, as
+far as we can determine, has not been asked directly:
+
+\begin{quote}
+\emph{If we infer a specification from some correct solutions to a problem, will it detect
+bugs in a different solution it has never seen?}
+\end{quote}
+
+We call the quantity \textbf{transfer rate}, and the answer turns out to depend on
+something specific and diagnosable.
+
+\subsection{Contributions}
+
+\begin{itemize}
+\item A \textbf{cross-implementation transfer protocol} (Section~III): mine from all but
+one solution, gate the mined predicates for soundness against every correct solution, then
+measure detection of real bugs in the held-out one. Transfer is evaluated on inputs
+disjoint from those used for mining.
+\item A \textbf{diagnosis of why transfer fails} (Section~IV): the mined specs that fail
+contain only bounds and type constraints, while the ones that succeed contain a relation
+between output and input contents.
+\item A \textbf{causal test} (Section~V): partitioning the predicate battery into bounds
+and relations shows bounds transfer at 0\% and relations at 37.5\%, and supplying a
+family-appropriate relation raises overall transfer from 37.5\% to 87.5\%.
+\item A small set of \textbf{regression tests} guarding the three measurement errors we
+made while building the experiment (Section~VI), because two of them produced
+plausible-looking numbers that were meaningless.
+\end{itemize}
+
+\section{Related Work}
+
+\textit{Dynamic invariant detection.} Daikon and its successors infer likely invariants
+from instrumented executions, using a library of templates over program variables
+\cite{ernst2007daikon}. The technique is mature and has been extended to concurrency,
+separation logic, and algebraic data types \cite{syminfer,sling}. Our concern is orthogonal
+to inference quality: we ask not whether a tool infers the \emph{right} invariants for one
+program, but whether the invariants it infers for one program describe its \emph{siblings}.
+
+\textit{LLM-based invariant and spec inference.} Recent work uses language models to
+propose loop invariants and to elaborate proof outlines into testable properties
+\cite{bali,proofoutline}. These methods can express far richer properties than template
+libraries, and are a natural fit for the relational predicates our results identify as the
+ones that actually transfer. We do not evaluate them here; our battery is deliberately
+small and template-based so that the transfer measurement is not confounded by the
+inference method's own capabilities.
+
+\textit{Property-based testing and test generalisation.} Property-based testing frameworks
+require a property to be supplied, and tools that generate properties from existing unit
+tests generalise a single test into a quantifiable one \cite{teralizer,quickrest}. That
+line assumes one test suite as the source. Our question is what happens when the source and
+the target are different programs.
+
+\textit{Bounds versus relations.} The distinction we report -- that values satisfy bounds
+more readily than they satisfy relations, and that only relations are falsifiable by
+behavioural bugs -- echoes classical work on specification completeness, but to our
+knowledge it has not been operationalised as a transferability measurement.
+
+\section{Method}
+
+\subsection{Problem families}
+
+We use four families, each small enough to reason about completely and each carrying bugs
+that occur naturally in hand-written solutions. For every family there are three
+independent correct solutions (different loop structures, different algorithms where
+possible) and two bugs, each of which changes the answer on at least one input:
+
+\begin{itemize}
+\item \textbf{sum}: return $\sum x$; bugs drop the last element, and double the first.
+\item \textbf{count\_positive}: count elements $>0$; bugs use $\ge 0$, and count $|x|>0$.
+\item \textbf{max\_subarray}: Kadane's algorithm; bugs initialise to zero so all-negative
+inputs fail, and ignore the final element.
+\item \textbf{is\_sorted}: return whether the list is non-decreasing; bugs use strict
+comparison, and skip the last pair.
+\end{itemize}
+
+Input generators include hand-written edge cases (empty list, singleton, all-negative,
+duplicates) because a bug that bites only on an edge is exactly the case a transferred spec
+should catch. Mining inputs, soundness-validation inputs, and evaluation inputs are drawn
+from three independent seeds.
+
+\subsection{The transfer protocol}
+
+For each family and each choice of held-out target solution $T$:
+
+\begin{enumerate}
+\item \textbf{Mine.} Retain every predicate from the battery that holds on every execution
+of every source solution $S \neq T$, over the mining inputs. Support is strict: one
+counterexample rejects a predicate.
+\item \textbf{Gate.} Discard any mined predicate that is false on \emph{any} correct
+solution over the validation inputs. This is the step that removes predicates which
+survived mining by coincidence.
+\item \textbf{Evaluate.} On disjoint evaluation inputs, count violations on the correct $T$
+(false positives) and on each bug variant of $T$ (detections).
+\end{enumerate}
+
+A case is \emph{caught} if the spec produces at least one violation on the buggy
+implementation. A case is a \emph{false positive} if the spec produces any violation on the
+correct held-out implementation. Transfer rate is the fraction of the 24 (family, target,
+bug) cases that are caught; false-positive rate is the fraction that flag correct code.
+
+\subsection{Predicate battery}
+
+The battery is fixed and generic: no predicate mentions a particular problem. It comprises
+\textbf{bounds} (results are integers or booleans; $\mathit{ret} \le |x|$;
+$\mathit{ret} \ge 0$; $\mathit{ret} \ge 0$ or $0 \in x$) and \textbf{relations}
+($\mathit{ret} = \sum x$; $\mathit{ret} \ge \min x$; $\mathit{ret} \le \max x$;
+$\mathit{ret} \le \max|x|$; $\mathit{ret} = 0$ or $\mathit{ret} = |x|$). Splitting the
+battery this way is what lets Section~V isolate the mechanism.
+
+\section{Results}
+
+\subsection{Generic mining transfers poorly}
+
+With the full battery, the transfer rate is \textbf{37.5\%} (9/24 cases) with a
+\textbf{0\%} false-positive rate. Table~\ref{tab:fam} shows that this average conceals a
+polarised result: two families transfer perfectly and two not at all.
+
+\begin{table}[t]
+\centering
+\caption{Transfer by family with the generic battery. The split is not gradual: families
+either transfer on every case or on none.}
+\label{tab:fam}
+\small
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Family & Cases & Transfer & Spec size & FP \\
+\midrule
+sum & 6 & 100.0\% & 4.0 & 0 \\
+max\_subarray & 6 & 50.0\% & 3.0 & 0 \\
+count\_positive & 6 & 0.0\% & 4.0 & 0 \\
+is\_sorted & 6 & 0.0\% & 3.0 & 0 \\
+\midrule
+All & 24 & 37.5\% & 3.5 & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{The failures are diagnosable, not mysterious}
+
+Inspecting what was mined explains the split. For \texttt{sum}, the surviving spec
+contains $\mathit{ret} = \sum x$, a relation between the return value and the contents of
+the input. Any bug that corrupts the sum violates it.
+
+For \texttt{is\_sorted}, the surviving spec is
+$\{\mathit{ret}\text{ is bool},\ \mathit{ret} \ge 0,\ \mathit{ret} \ge 0 \text{ or } 0 \in x\}$.
+The last two are vacuous over booleans, and the first is a type constraint. The spec says
+``returns a boolean'' and nothing else, so no behavioural bug can violate it. The two
+\texttt{is\_sorted} bugs -- a strictness error and an off-by-one -- both return booleans, and
+both go undetected.
+
+For \texttt{count\_positive}, the spec is entirely bounds
+($\mathit{ret} \le |x|$, $\mathit{ret} \ge 0$). Both bugs return counts that satisfy every
+bound: counting $\ge 0$ instead of $>0$ still yields a number between zero and $|x|$.
+
+This yields the paper's hypothesis: \emph{transfer depends on whether the mined spec
+contains a relation to input content, not on how many predicates it contains.}
+
+\subsection{A worked contrast}
+
+The clearest illustration comes from comparing what the miner outputs for the same family
+under different batteries. Mining \texttt{sum} from two correct solutions with the full
+battery yields
+
+\begin{center}
+$\{\mathit{ret} \le \sum x,\ \mathit{ret} \ge \sum x,\ \mathit{ret} = \sum x\}$
+\end{center}
+
+which catches both \texttt{sum} bugs in every held-out solution. Restricting the battery to
+bounds yields only
+
+\begin{center}
+$\{\mathit{ret}\ \text{is an integer}\}$
+\end{center}
+
+which catches nothing, because both bugs also return integers. The spec has not become
+wrong; it has become true of everything, and a property true of everything is not a
+specification.
+
+The same collapse occurs for \texttt{is\_sorted}, where the full battery yields
+$\{\mathit{ret}\ \text{is bool},\ \mathit{ret} \ge 0,\ \mathit{ret} \ge 0 \text{ or } 0 \in x\}$.
+The two latter predicates are vacuously true over booleans, so the spec reduces to the type
+constraint, and neither the strictness bug nor the off-by-one can violate it.
+
+\section{The Mechanism: Bounds versus Relations}
+
+We test the hypothesis by running the protocol three times with the battery restricted:
+bounds only, relations only, and the full battery (Table~\ref{tab:split}).
+
+\begin{table}[t]
+\centering
+\caption{Partitioning the predicate battery. Bounds transfer on nothing; relations carry
+all of the transfer. Adding bounds to relations changes nothing but spec size.}
+\label{tab:split}
+\small
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Battery & Cases & Transfer & FP & Spec size \\
+\midrule
+Bounds only & 24 & \textbf{0.0\%} & 0\% & 2.2 \\
+Relations only & 24 & 37.5\% & 0\% & 1.2 \\
+Both & 24 & 37.5\% & 0\% & 3.5 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Bounds alone never catch a bug: 0 of 24. Relations alone recover the entire 37.5\% of the
+full battery while using \emph{one third} of the predicates. In cases where a relational
+predicate is present in the mined spec, transfer is \textbf{75\%}; in cases where none is,
+it is zero.
+
+\subsection{Presence of a relation is a perfect discriminator}
+
+Sorting the 24 full-battery cases by outcome gives a clean separation
+(Table~\ref{tab:disc}): \emph{every} caught case contains at least one relational
+predicate, and \emph{no} case without one is caught. Spec size does not separate the
+classes -- caught cases average 3.7 predicates and missed cases 3.4 -- so the difference is
+not that successful specs are larger. They are the same size and describe different things.
+
+\begin{table}[t]
+\centering
+\caption{Cases grouped by outcome in the full-battery condition. The presence of a
+relational predicate, not the number of predicates, separates them.}
+\label{tab:disc}
+\small
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Outcome & Cases & With relation & Mean size & Mean viol. \\
+\midrule
+Caught & 9 & 9 (100\%) & 3.7 & 509 \\
+Missed & 15 & 3 (20\%) & 3.4 & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The three exceptions are informative rather than anomalous: all are
+\texttt{max\_subarray} cases in which the mined relation
+($\mathit{ret} \ge$ every subarray sum) is genuinely satisfied by the buggy
+implementation. Kadane's algorithm initialised to zero returns the correct maximum on any
+input containing a positive value, and the mined relation is a lower bound that a
+zero-initialised variant still meets at every evaluation point. The spec is not at fault;
+the bug does not violate the property that was inferred, and no inference procedure
+confined to that property could detect it. Detecting it requires a relation that is tight
+on all-negative inputs, which is a different predicate.
+
+The practical reading is direct: a spec-mining pipeline that fills its output with bounds
+and type constraints produces specifications that cannot detect behavioural errors, however
+many properties it reports.
+
+\section{Intervention: Availability of the Right Relation}
+
+The relational hypothesis makes a prediction that the previous section cannot test on its
+own. If failure is caused by the \emph{absence} of an appropriate relation, then supplying
+one should fix it -- without changing anything else.
+
+We add, per family, a single relation expressing the family's own semantics over input
+contents: a count of elements satisfying the family predicate for \texttt{count\_positive},
+and non-decreasingness for \texttt{is\_sorted}. These remain ordinary predicates in the
+battery; only their availability differs.
+
+\begin{table}[t]
+\centering
+\caption{Supplying one family-appropriate relation. The two failed families go from never
+transferring to always transferring, at unchanged zero false positives.}
+\label{tab:interv}
+\small
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Family & Generic & $+$ relation \\
+\midrule
+sum & 100.0\% & 100.0\% \\
+count\_positive & 0.0\% & \textbf{100.0\%} \\
+max\_subarray & 50.0\% & 50.0\% \\
+is\_sorted & 0.0\% & \textbf{100.0\%} \\
+\midrule
+Overall & 37.5\% & \textbf{87.5\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Transfer rises from 37.5\% to \textbf{87.5\%} (Table~\ref{tab:interv}) with false positives
+still at zero. Both previously failing families reach 100\%. The two cases that remain
+undetected are \texttt{max\_subarray}, where the supplied relation
+($\mathit{ret} \ge$ every subarray sum) is true of the remaining bug and therefore correctly
+does not fire -- the miner cannot detect a violation of a property the bug respects.
+
+\subsection{Stability}
+
+Repeating the before/after comparison at 200, 400 and 800 mining inputs yields identical
+transfer rates (37.5\% and 87.5\% respectively) and zero false positives in all six runs.
+Transfer here is a property of \emph{which predicates are available}, not of how much data
+is collected, which is consistent with the mechanism: additional inputs cannot cause a
+predicate that does not exist in the battery to be mined, but they can cause coincidentally
+sound predicates to be rejected -- which is what the soundness gate does.
+
+This also explains an asymmetry worth noting. More data is usually assumed to help
+specification inference. Here it can only reduce the mined set, by exposing predicates that
+were true by coincidence. The binding constraint is the predicate language, not the sample
+size, and no amount of additional execution data substitutes for adding the right relation.
+
+\section{Measurement Errors We Made}
+
+Two of the numbers we first obtained were plausible and meaningless. We report them because
+the same traps apply to anyone building a similar benchmark.
+
+\textbf{Vacuous predicates.} Our initial battery included predicates written as
+``\texttt{... or True}'', which always hold. They were mined in 24 of 24 cases and caught
+nothing, inflating spec size without changing transfer.
+
+\textbf{Input mutation.} One correct solution consumed its argument via \texttt{list.pop()}.
+It therefore emptied the evaluation lists on first use, so every subsequent measurement saw
+empty inputs. Transfer appeared to be 8.33\%; the true figure on the same battery was
+20.83\%, and later 37.5\% once the battery was corrected. \emph{A single mutating
+implementation invalidated every number in the experiment.}
+
+\textbf{Coincidental soundness.} A bound predicate ($\mathit{ret} \le |x|$) held on the
+mining inputs because they happened to be short, then fired on correct code once evaluated
+on longer lists. This is why the soundness gate validates against \emph{every} correct
+solution on a disjoint input set rather than against the sources alone.
+
+All three are now guarded by regression tests (Section~V), including one asserting that
+every predicate in the battery is false on at least one trace, and one asserting that no
+solution mutates its input.
+
+\section{Limitations}
+
+\textbf{Small and hand-built.} Four families, twelve solutions, eight bugs. The bugs are
+hand-written to be natural, but they are not drawn from a real defect corpus, so the
+absolute transfer rates should not be read as estimates for production code. The
+\emph{ordering} -- bounds below relations -- is the robust part, because it follows from
+what the predicates can express.
+
+\textbf{Template battery, not LLM inference.} We deliberately use a small template battery
+so that transfer measures the spec, not the inferrer. A modern LLM-based miner can express
+relations that no template covers, and would likely place the absolute numbers higher while
+leaving the mechanism unchanged. Testing that is the obvious next step.
+
+\textbf{One predicate language.} All predicates are Python callables over a flattened
+trace. Richer specifications -- quantifiers over indices, pre/post relations, heap
+properties -- are not represented.
+
+\textbf{Detection, not repair.} We measure whether a spec fires, not whether the reported
+violation localises the fault. A spec that fires on every input is minimally useful; we do
+not measure violation precision beyond ensuring it is zero on correct code.
+
+\section{Implications}
+
+\textit{For users of spec-mining tools.} Before trusting an inferred specification to
+check a rewrite or a port, read what it says. If every property relates the result to the
+input's shape, type, or size rather than to its contents, the spec cannot detect a
+behavioural error. This is checkable by inspection and does not require re-running the
+miner.
+
+\textit{For tool builders.} The binding constraint is the predicate language, not the
+volume of execution data (Section~V-A). A miner with a large template library of bounds
+will produce large specifications with poor transfer; a miner with few, well-chosen
+relations will produce small specifications that work. Reporting the number of inferred
+invariants is therefore not a useful quality signal, and a tool that scores itself by
+invariant count is optimising the wrong quantity.
+
+\textit{For LLM-based inference.} The practical appeal of language-model-based invariant
+proposal is that it is not confined to a template library: it can express relations that no
+fixed battery contains. Our results suggest this is exactly the capability that matters,
+and that the relevant evaluation is not whether a model proposes a correct invariant for
+one program but whether its invariants transfer to a sibling implementation. We regard that
+as the natural extension of this work.
+
+\textit{For autograders and judges.} A hidden test suite is a specification that has been
+withheld. Our result quantifies why withholding it matters: a specification derived from
+one correct solution can be satisfied by solutions that are wrong, as long as the errors
+preserve the properties that were inferred. The \texttt{max\_subarray} exception above is
+exactly such a case.
+
+\section{Threats to Validity}
+
+\textit{Construct:} we equate ``specification quality'' with detection of planted bugs. A
+spec may be valuable for documentation or for guiding a proof without detecting any of our
+bugs, and our measure would score it zero. We make the choice because detection is the
+property a user of a cross-implementation spec actually relies on.
+
+\textit{Internal:} the bugs are hand-selected. A bug deliberately constructed to violate a
+bound -- for example returning a value larger than the input length -- would reverse the
+ordering. Our claim is therefore about the bugs that arise from ordinary mistakes in these
+families, which respect bounds and violate relations.
+
+\textit{External:} four families in one language with one flattened trace representation.
+The mechanism we identify is a statement about what predicates can express, which should
+generalise, but the transfer percentages should not be quoted outside this setting.
+
+\textit{Statistical:} 24 cases per condition, with no repetition across random seeds beyond
+the input-size sweep in Section~V-A. We report exact fractions rather than inferential
+statistics because the case count is small and the conditions are discrete; a reader should
+treat 9/24 and 21/24 as descriptive, not as estimated population rates.
+
+\section{Conclusion}
+
+Specifications inferred from one implementation transfer to another only when they relate
+the output to the contents of the input. Bounds and type constraints -- which is most of
+what a generic miner readily finds -- transfer on none of our cases, while a single
+appropriate relation takes the two failing families from never detecting a bug to always
+detecting one, raising overall transfer from 37.5\% to 87.5\% with no false positives.
+
+For tool builders the implication is uncomfortable but simple: reporting more invariants is
+not the same as reporting transferable ones, and a spec suite consisting of bounds is
+measurably worthless as a check on a sibling implementation. For users, the question to ask
+of any inferred specification is whether it mentions the input at all.
+
+\begin{thebibliography}{9}
+
+\bibitem{ernst2007daikon}
+M. D. Ernst \textit{et al.}, ``The Daikon system for dynamic detection of likely
+invariants,'' \textit{Science of Computer Programming}, vol. 69, no. 1--3, pp. 35--45, 2007.
+
+\bibitem{syminfer}
+S. Srikanth \textit{et al.}, ``SymInfer: Inferring program invariants using symbolic
+states,'' in \textit{Proc. CAV}, 2017.
+
+\bibitem{sling}
+T. H. Nguyen \textit{et al.}, ``SLING: Using dynamic analysis to infer program invariants
+in separation logic,'' in \textit{Proc. PLDI}, 2019.
+
+\bibitem{bali}
+``BALI: Branch-aware loop invariant inference with large language models,'' arXiv preprint,
+2026. \textit{(Title verified via search; full bibliographic details to be confirmed before
+submission.)}
+
+\bibitem{proofoutline}
+``Property-based testing by elaborating proof outlines,'' arXiv preprint.
+\textit{(Verified via search; details to be confirmed.)}
+
+\bibitem{teralizer}
+``Teralizer: Semantics-based test generalization from conventional unit tests to
+property-based tests,'' arXiv preprint. \textit{(Verified via search; details to be
+confirmed.)}
+
+\bibitem{quickrest}
+S. Karlsson, A. Causevi\'c, and D. Sundmark, ``QuickREST: Property-based test generation of
+OpenAPI-described RESTful APIs,'' in \textit{Proc. ICST}, 2020.
+
+\end{thebibliography}
+
+\end{document}
